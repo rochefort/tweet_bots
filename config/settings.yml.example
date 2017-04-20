@@ -3,3 +3,5 @@ twitter:
   consumer_secret:     'your_consumer_secret'
   access_token:        'your_oauth_token'
   access_token_secret: 'your_oauth_token_secret'
+  retweet_users:
+    - someuser
