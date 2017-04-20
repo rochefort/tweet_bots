@@ -5,7 +5,7 @@ require "yaml"
 require "twitter"
 
 class TweetBot
-  USER_RSS = "https://queryfeed.net/twitter?title-type=user-name-both&geocode=&q=%40"
+  USER_RSS = "https://queryfeed.net/twitter?title-type=user-name-both&geocode=&q=from%3A"
 
   def initialize(user_name)
     config = YAML.load_file(File.join(PROJECT_ROOT, "config/settings.yml"))
@@ -32,7 +32,7 @@ class TweetBot
   end
 
   def favs_and_retweets
-    @retweet_users.each do |user|
+    @retweet_users.reverse do |user|
       rss_url = "#{USER_RSS}#{user}"
       rss = RSS::Parser.parse(rss_url)
       rss.items.each do |item|
