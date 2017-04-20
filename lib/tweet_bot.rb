@@ -28,19 +28,15 @@ class TweetBot
 
   def fav_and_retweet(id)
     result = @client.favorite(id)
-    p result
     @client.retweet(id) unless result.empty?
   end
 
   def favs_and_retweets
     @retweet_users.each do |user|
-      p user
       rss_url = "#{USER_RSS}#{user}"
       rss = RSS::Parser.parse(rss_url)
       rss.items.each do |item|
-        p item.guid.content
         guid = item.guid.content.match(/\d+$/).to_a[0]
-        p guid
         next unless guid
         fav_and_retweet(guid)
         sleep 1
