@@ -37,7 +37,7 @@ class DailyTweet
       page = @agent.get(link)
       sleep 1
       title = page.search(".a-size-extra-large").text()
-      score = page.search(".a-icon.a-icon-star.a-star-4-5 .a-icon-alt")[0].text()
+      score = page.search(".a-icon-star .a-icon-alt")[0].text()
       Product.new(title, score, link, asin)
     end
 
