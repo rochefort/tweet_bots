@@ -32,10 +32,10 @@ class TweetBot
   end
 
   def favs_and_retweets
-    @retweet_users.reverse do |user|
+    @retweet_users.each do |user|
       rss_url = "#{USER_RSS}#{user}"
       rss = RSS::Parser.parse(rss_url)
-      rss.items.each do |item|
+      rss.items.reverse.each do |item|
         guid = item.guid.content.match(/\d+$/).to_a[0]
         next unless guid
         fav_and_retweet(guid)
